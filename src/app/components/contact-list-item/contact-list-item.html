@@ -1,0 +1,13 @@
+<li [class.favourite]="contact().isFavourite === true">
+  <span>{{ contact().firstName }} {{ contact().lastName }}</span>
+  <span>{{ contact().number }}</span>
+  <span>{{ contact().email }}</span>
+  <span>-</span>
+  <span>
+    <button (click)="contactService.deleteContact(contact().id)">Borrar</button>
+  </span>
+
+  @if (contact().isFavourite === true) {
+    <span>⭐</span>
+  }
+</li>
