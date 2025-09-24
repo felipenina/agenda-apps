@@ -1,30 +1,18 @@
-<!-- <a routerLink="login">Ir a login</a> -->
- <div>
-  <span>Nombre</span>
-  <span>Telefono</span>
-  <span>Email</span>
-  <span>Grupos</span>
-  <span>Acciones</span>
- </div>
- <ul>
-  @for (contactoIndividual of contactService.contacts; track $index) {
-    <app-contact-list-item [contact]="contactoIndividual"></app-contact-list-item>
-  }
- </ul>
-
-
  <h2>Nuevo contacto</h2>
- <form (ngSubmit)="createContact(newContactForm.value)" #newContactForm="ngForm"> // conecta el input con el formulario (newContactForm) para que Angular sepa si es válido o no
+ <form (ngSubmit)="createContact(newContactForm)" #newContactForm="ngForm">
   <div>
-    <label for="first-name">Nombre</label>
-    <input id="first-name" name="firstName" type="text" ngModel required="true" minlength="2" maxlength="20">
+    <label for="first-name">Nombre*</label>
+    <input id="first-name" name="firstName" type="text" ngModel required="true" minlength="2" maxlength="20" #firstName="ngModel">
+    @if (firstName.dirty && firstName.invalid) {
+      <p class="error">El nombre es obligatorio y no puede ser una sola letra</p>
+    }
   </div>
   <div>
     <label for="last-name">Apellido</label>
     <input id="last-name" name="lastName" type="text" ngModel maxlength="20">
   </div>
   <div>
-    <label for="phone">Telefono</label>
+    <label for="phone">Telefono*</label>
     <input id="phone" name="number" type="text" ngModel required="true" minlength="3" maxlength="30">
   </div>
   <div>
@@ -47,8 +35,9 @@
     <label for="image">URL Imagen</label>
     <input id="image" name="image" type="text" ngModel minlength="10">
   </div>
+  @if (errorEnBack) {
+      <p class="error">Error indeterminado, intente nuevamente.</p>
+    } 
   <button [disabled]="newContactForm.invalid">+</button>
-  
- </form>
 
- <a routerLink="/contacts/new">+</a>
+ </form>
