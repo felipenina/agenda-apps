@@ -5,6 +5,7 @@
   <span>-</span>
   <span>
     <button (click)="contactService.deleteContact(contact().id)">Borrar</button>
+    <a [routerLink]="['/contacts', contact().id, 'edit']">Editar</a>
   </span>
 
   @if (contact().isFavourite === true) {

@@ -1,20 +1,30 @@
-import { Component, inject } from '@angular/core';
-import { FormsModule, NgForm } from '@angular/forms';
-import { NewContact } from '../../interfaces/contact';
+import { Component, ElementRef, inject, input, OnInit, viewChild } from '@angular/core';
+import { Form, FormsModule, NgForm } from '@angular/forms';
+import { Contact, NewContact } from '../../interfaces/contact';
 import { ContactsService } from '../../services/contacts-service';
 import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-new-edit-contact',
-  imports: [],
+  imports: [FormsModule],
   templateUrl: './new-edit-contact.html',
   styleUrl: './new-edit-contact.scss'
 })
-export class NewEditContact {
+export class NewEditContact implements OnInit {
   contactsService = inject(ContactsService);
   router = inject(Router)
   errorEnBack = false;
+  idContacto = input<number>();
+  contactoOriginal:Contact|undefined = undefined;
+  form = viewChild<ElementRef<Form>("newContactForm");
 
+  async ngOnInit(){
+    if (this.idContacto()){
+      this.contactoOriginal = await this.contactsService.getContactById(this.idContacto()!);
+      console.log(this.contactoOriginal)
+    }
+    
+  }
   async createContact(form:NgForm){
     this.errorEnBack = false;
     const nuevoContacto: NewContact ={
