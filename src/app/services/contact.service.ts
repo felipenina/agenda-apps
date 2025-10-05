@@ -1,4 +1,4 @@
-import { Injectable } from '@angular/core';
+import { inject, Injectable } from '@angular/core';
 import {Contact, NewContact} from "../interfaces/contact";
 import { AuthService } from './auth-service';
 
@@ -55,12 +55,63 @@ export class contactService {
   
   }
 
-  editContact() { }
-
-  
-  deleteContact(id:string) {
-    this.contacts = this.contacts.filter(contact => contact.id !== id)
+   async editContact(contactoEditado:Contact) {
+    const res = await fetch(this.URL_BASE+"/"+contactoEditado.id,
+      {
+        method:"PUT",
+        headers: {
+          "Content-Type": "application/json",
+          Authorization: "Bearer "+this.authService.token,
+        },
+        body: JSON.stringify(contactoEditado)
+      });
+    if(!res.ok) return;
+    const resContact:Contact = await res.json();
+    
+    this.contacts = this.contacts.map(contact => {
+      if(contact.id === resContact.id) {
+        return resContact;
+      };
+      return contact;
+    });
+    return resContact;
   }
 
+
+  async deleteContact(id:string | number) {
+    const res = await fetch(this.URL_BASE+"/"+id,
+      {
+        method: "DELETE",
+        headers: {
+          Authorization: "Bearer "+this.authService.token,
+        },
+      });
+    if(!res.ok) return;
+    this.contacts = this.contacts.filter(contact => contact.id !== id);
+    return true;
+  }
+
+
+
+  async setFavourite(id:string | number ) {
+    const res = await fetch(this.URL_BASE+"/"+id+"favorite",
+      {
+        method: "POST",
+        headers: {
+          Authorization: "Bearer "+this.authService.token,
+        },
+      });
+    if(!res.ok) return;
+    
+    this.contacts = this.contacts.map(contact => {
+      if(contact.id === id) {
+        return {...contact, isFavorite: !contact.isFavourite};
+      };
+      return contact;
+    });
+    return true;
+  }
 }
+
+
 
