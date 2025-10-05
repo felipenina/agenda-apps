@@ -1,3 +1,10 @@
+ <div id = "container" class = "card">
+  @if(idContacto()){
+    <h2>Editar contacto</h2>
+  }@else {
+    <h2>Nuevo contacto</h2>
+  }
+ 
  <h2>Nuevo contacto</h2>
  <form (ngSubmit)="createContact(newContactForm)" #newContactForm="ngForm">
   <div>
@@ -38,6 +45,10 @@
   @if (errorEnBack) {
       <p class="error">Error indeterminado, intente nuevamente.</p>
     } 
-  <button [disabled]="newContactForm.invalid">+</button>
-
+    @if(idContacto()){
+  <button [disabled]="newContactForm.invalid">Editar</button>
+      }  @else {
+      <button [disabled]="newContactForm.invalid">Crear</button>
+      }
+    
  </form>

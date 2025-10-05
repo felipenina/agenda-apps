@@ -2,6 +2,7 @@ import { inject, Injectable } from '@angular/core';
 import {Contact, NewContact} from "../interfaces/contact";
 import { AuthService } from './auth-service';
 
+
 @Injectable({
   providedIn: 'root'
 })
@@ -66,15 +67,15 @@ export class contactService {
         body: JSON.stringify(contactoEditado)
       });
     if(!res.ok) return;
-    const resContact:Contact = await res.json();
+    
     
     this.contacts = this.contacts.map(contact => {
-      if(contact.id === resContact.id) {
-        return resContact;
+      if(contact.id === contactoEditado.id) {
+        return contactoEditado;
       };
       return contact;
     });
-    return resContact;
+    return contactoEditado;
   }
 
 
