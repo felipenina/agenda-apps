@@ -95,13 +95,14 @@ export class contactService {
 
 
   async setFavourite(id:string | number ) {
-    const res = await fetch(this.URL_BASE+"/"+id+"favorite",
+    const res = await fetch(this.URL_BASE+"/"+id+"/favorite",
       {
         method: "POST",
         headers: {
           Authorization: "Bearer "+this.authService.token,
         },
       });
+      
     if(!res.ok) return;
     
     this.contacts = this.contacts.map(contact => {

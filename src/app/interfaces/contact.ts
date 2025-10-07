@@ -1,5 +1,5 @@
 export interface Contact {
-  id: string,
+  id: number,
   firstName: string,
   lastName: string,
   address: string
@@ -10,13 +10,4 @@ export interface Contact {
   isFavourite: boolean;
 }
 
-export interface NewContact {
-  firstName: string;
-  lastName: string;
-  address: string;
-  number: string;
-  email: string;
-  image: string;
-  company: string;
-  isFavourite: boolean;
-}
+export type NewContact = Omit<Contact, "id">;
