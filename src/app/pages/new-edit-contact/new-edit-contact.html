@@ -6,7 +6,7 @@
   }
  
  <h2>Nuevo contacto</h2>
- <form (ngSubmit)="createContact(newContactForm)" #newContactForm="ngForm">
+ <form (ngSubmit)="HandleFormSubmission(newContactForm)" #newContactForm="ngForm">
   <div>
     <label for="first-name">Nombre*</label>
     <input id="first-name" name="firstName" type="text" ngModel required="true" minlength="2" maxlength="20" #firstName="ngModel">
