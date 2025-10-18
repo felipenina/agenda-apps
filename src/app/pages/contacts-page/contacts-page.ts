@@ -6,7 +6,6 @@ import { AuthService } from '../../services/auth-service';
 import { contactService } from '../../services/contact.service';
 import { FormsModule } from '@angular/forms';
 
-
 @Component({
   selector: 'app-contacts-page',
   imports: [RouterModule,ContactListItem, FormsModule],
@@ -14,11 +13,11 @@ import { FormsModule } from '@angular/forms';
   styleUrl: './contacts-page.scss'
 })
 export class ContactsPage implements OnInit {
-  ngOninit(): void{ 
+  ngOnInit(): void {
     this.contactsService.getContacts();
   }
 
   authService = inject(AuthService);
   contactsService = inject(contactService);
-}
 
+}

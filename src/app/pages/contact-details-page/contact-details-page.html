@@ -6,7 +6,7 @@
   <h1>{{contacto!.firstName}} {{contacto!.lastName}}</h1>
   <p>Email: {{contacto.email}}</p>
   <p>Teléfono: {{contacto.number}}</p>
-@if (contacto.isFavorite) {
+@if (contacto.isFavourite) {
   <p>⭐</p>
   <button (click)="toggleFavorite()">Desmarcar favorito</button>
 } @else {

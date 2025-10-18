@@ -1,5 +1,5 @@
 import { Component, inject, input, OnInit } from '@angular/core';
-import { ContactsService } from '../../services/contact.service';
+import { contactService } from '../../services/contact.service';
 import { Contact } from '../../interfaces/contact';
 import { Router, RouterModule } from '@angular/router';
 
@@ -12,7 +12,7 @@ import { Router, RouterModule } from '@angular/router';
 })
 export class ContactDetailsPage implements OnInit {
   idContacto = input.required<string>();
-  readonly contactService = inject(ContactsService);
+  readonly contactService = inject(contactService);
   contacto: Contact | undefined;
   cargandoContacto = false;
   router = inject(Router);
@@ -20,7 +20,6 @@ export class ContactDetailsPage implements OnInit {
 
   async ngOnInit() {
     if(this.idContacto()){
-      // Si encuentro el contacto en el array del servicio lo uso, mientras tanto cargo el contacto del backend por si hubo cambios en el contacto
       this.contacto = this.contactService.contacts.find(contacto => contacto.id.toString() === this.idContacto());
       if(!this.contacto) this.cargandoContacto = true;
       const res = await this.contactService.getContactById(this.idContacto());
@@ -33,7 +32,7 @@ export class ContactDetailsPage implements OnInit {
   async toggleFavorite(){
     if(this.contacto){
       const res = await this.contactService.setFavourite(this.contacto.id);
-      if(res) this.contacto.isFavorite = !this.contacto.isFavorite;
+      if(res) this.contacto.isFavourite = !this.contacto.isFavourite;
     }
   }
 
