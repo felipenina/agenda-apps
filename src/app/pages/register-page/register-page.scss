@@ -1,1 +1,98 @@
 @use "./../../../../public/styles/forms-pages.scss";
+
+.register-container {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  height: 100vh;
+  background-color: #0f111a;
+}
+
+.register-box {
+  background-color: #151823;
+  padding: 1rem 2rem; 
+  border-radius: 20px;
+  width: 100%;
+  max-width: 400px;
+  margin: 0 auto;
+  box-shadow: 0 4px 20px rgba(0, 0, 0, 0.3);
+  text-align: center;
+}
+
+
+h1 {
+  color: #fff;
+  margin-bottom: 2rem;
+  font-weight: bold;
+}
+
+.form-group {
+  margin-bottom: 1.3rem;
+  text-align: left;
+}
+
+label {
+  display: block;
+  margin-bottom: 0.5rem;
+  color: #bbb;
+  font-weight: 500;
+}
+
+input {
+  width: 100%;
+  padding: 0.9rem;
+  font-size: 0.9rem;
+  border: none;
+  border-bottom: 2px solid #333;
+  background-color: #2a2d3e;
+  color: #fff;
+  border-radius: 5px;
+  outline: none;
+  transition: border-color 0.3s;
+}
+
+input:focus {
+  border-color: #a78bfa;
+}
+
+button {
+  width: 100%;
+  padding: 1rem;
+  background-color: #444;
+  color: #ccc;
+  border: none;
+  border-radius: 10px;
+  font-weight: bold;
+  cursor: pointer;
+  transition: all 0.3s;
+}
+
+button:hover:enabled {
+  background-color: #5a5a5a;
+  color: #fff;
+}
+
+button:disabled {
+  opacity: 0.5;
+  cursor: not-allowed;
+}
+
+.login-text {
+  margin-top: 1.5rem;
+  color: #ccc;
+}
+
+.login-text a {
+  color: #a78bfa;
+  text-decoration: none;
+}
+
+.login-text a:hover {
+  text-decoration: underline;
+}
+
+.error {
+  color: #ff6b6b;
+  font-size: 0.85rem;
+  margin-top: 0.3rem;
+}

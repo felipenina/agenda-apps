@@ -1,4 +1,4 @@
-<div id="container" class="card">
+<div class="login-container">
   <h1>Iniciar sesión</h1>
   <form #loginForm="ngForm" (ngSubmit)="login(loginForm)">
   <div>
@@ -22,7 +22,10 @@
   @if (errorLogin) {
     <p class="error">Datos de sesión incorrectos, intente nuevamente.</p>
   } 
-  <p>No tenés cuenta? <a routerLink="/register">Registrate</a></p>
+  <div class = "register">
+   <p>No tenés cuenta? <a routerLink="/register">Registrate</a></p>
+  </div>  
 </form>
+
 
 </div>
