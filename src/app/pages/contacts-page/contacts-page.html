@@ -1,17 +1,40 @@
 <!-- <a routerLink="login">Ir a login</a> -->
- <div>
-  <span>Nombre</span>
-  <span>Telefono</span>
-  <span>Email</span>
-  <span>Grupos</span>
-  <span>Acciones</span>
- </div>
- <ul>
-  @for (contactoIndividual of contactsService.contacts; track $index) {
-    <a [routerLink] = "['/contacts',contactoIndividual.id]">
-    <app-contact-list-item [contact]="contactoIndividual"></app-contact-list-item>
-    </a>
-  }
- </ul>
+<div class="container">
+  
+  <div class="sidebar">
+    <div class="logo">Agenda</div>
 
- <a routerLink = "/contacts/new">+</a>
+    <div class="main-links">
+      <a routerLink="/contacts" routerLinkActive="active">Contactos</a>
+      <a routerLink="/contacts/new" routerLinkActive="active">+ Nuevo</a>
+      <a routerLink="/groups" routerLinkActive="active">Grupos</a>
+    </div>
+
+    <div class="bottom-links">
+      <a href="#">Exportar</a>
+      <a href="#">Correo</a>
+      <div class="logout">Logout</div>
+    </div>
+  </div>
+
+  
+  <div class="main-content">
+    <div class="table-header">
+      <span>Nombre</span>
+      <span>Teléfono</span>
+      <span>Email</span>
+      <span>Grupos</span>
+      <span>Acciones</span>
+    </div>
+
+    <ul class="contact-list">
+      @for (contactoIndividual of contactsService.contacts; track $index) {
+        <a [routerLink]="['/contacts', contactoIndividual.id]">
+          <app-contact-list-item [contact]="contactoIndividual"></app-contact-list-item>
+        </a>
+      }
+    </ul>
+
+    <a class="floating-btn" routerLink="/contacts/new">+</a>
+  </div>
+</div>
