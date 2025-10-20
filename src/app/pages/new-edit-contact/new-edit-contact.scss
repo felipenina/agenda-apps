@@ -1,36 +1,38 @@
 .new-contact-card {
-  max-width: 700px;
-  margin: 50px auto;
-  padding: 30px;
-  background-color: #1e1e1e;
+  max-width: 750px;
+  margin: 5rem auto;
+  padding: 2.5rem;
+  background-color: #181818; 
   color: #fff;
-  border-radius: 16px;
-  box-shadow: 0 0 15px rgba(0, 0, 0, 0.4);
+  border-radius: 18px;
+  box-shadow: 0 6px 20px rgba(0, 0, 0, 0.6);
+  border: 1px solid #2a2a2a;
+  transition: all 0.3s ease;
+}
+
+.new-contact-card:hover {
+  box-shadow: 0 8px 25px rgba(0, 0, 0, 0.8);
 }
 
 h2 {
   text-align: center;
   color: #bb86fc;
-  margin-bottom: 25px;
+  margin-bottom: 2rem;
   font-weight: 600;
-}
-
-.contact-form {
-  display: flex;
-  flex-direction: column;
-  gap: 20px;
+  font-size: 1.6rem;
 }
 
 .form-grid {
   display: grid;
-  grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
-  gap: 20px;
+  grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+  gap: 1.5rem;
 }
 
 label {
   display: block;
-  margin-bottom: 5px;
+  margin-bottom: 6px;
   font-weight: 500;
+  color: #ccc;
 }
 
 input[type="text"],
@@ -39,63 +41,81 @@ input[type="url"],
 input[type="number"],
 textarea {
   width: 100%;
-  padding: 10px;
-  border: 1px solid #444;
-  background-color: #2a2a2a;
+  padding: 10px 12px;
+  border: 1px solid #333;
+  background-color: #222;
   border-radius: 8px;
   color: #fff;
+  font-size: 0.95rem;
+  transition: all 0.2s;
 }
 
 input:focus {
   outline: none;
   border-color: #bb86fc;
-  background-color: #333;
-}
-
-.checkbox {
-  display: flex;
-  align-items: center;
-  gap: 10px;
+  background-color: #292929;
 }
 
 .error {
   color: #ff6b6b;
-  font-size: 0.9em;
+  font-size: 0.85rem;
   margin-top: 4px;
 }
 
 .buttons {
   display: flex;
   justify-content: flex-end;
-  gap: 10px;
-  margin-top: 20px;
+  gap: 1rem;
+  margin-top: 2rem;
 }
 
-.btn {
-  padding: 10px 20px;
+button {
+  padding: 10px 22px;
   border: none;
   border-radius: 8px;
   cursor: pointer;
   font-weight: 500;
-  transition: all 0.2s;
+  font-size: 1rem;
+  transition: all 0.25s;
 }
 
-.btn.primary {
-  background-color: #bb86fc;
-  color: #121212;
+button:not(.cancel) {
+  background-color: #8b5cf6;
+  color: #fff;
 }
 
-.btn.primary:hover {
+button:not(.cancel):hover {
   background-color: #9c63e7;
+  transform: translateY(-2px);
 }
 
-.btn.cancel {
+button.cancel {
   background-color: transparent;
   color: #bbb;
   border: 1px solid #555;
 }
 
-.btn.cancel:hover {
+button.cancel:hover {
   color: #fff;
   border-color: #888;
+}
+
+app-spinner {
+  display: block;
+  margin: 0 auto;
+}
+
+
+.preview {
+  display: flex;
+  justify-content: center;
+  margin-bottom: 1rem;
+}
+
+.preview img {
+  width: 80px;
+  height: 80px;
+  border-radius: 50%;
+  object-fit: cover;
+  border: 2px solid #8b5cf6;
 }

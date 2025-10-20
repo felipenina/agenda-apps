@@ -60,7 +60,7 @@ export class NewEditContact implements OnInit {
       this.errorEnBack = true;
       return
     };
-    this.router.navigate(["/contacts",res.id]);
+    this.router.navigate(["/contacts"]);
   }
   
 }
