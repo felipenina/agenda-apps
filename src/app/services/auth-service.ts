@@ -37,7 +37,7 @@ export class AuthService implements OnInit {
     localStorage.removeItem("token")
     this.router.navigate(["/login"]);
   }
-  /** Revisa cada 10 minutos que el token siga siendo valido */
+  
   revisionToken() {
     return setInterval(() => {
       if (this.token) {
@@ -52,7 +52,7 @@ export class AuthService implements OnInit {
           this.logout();
         }
       }
-    }, 600000); // 10 minutes in milliseconds
+    }, 600); 
   }
 }
 

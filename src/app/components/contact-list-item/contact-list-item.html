@@ -1,15 +1,16 @@
-<li [class.favourite]="contact().isFavourite === true">
-  <span>{{ contact().firstName }} {{ contact().lastName }}</span>
-  <span>{{ contact().number }}</span>
-  <span>{{ contact().email }}</span>
-  <span>-</span>
-  <span>
-    <button (click)="contactService.deleteContact(contact().id)">Borrar</button>
-    <a [routerLink]="['/contacts', contact().id, 'edit']">Editar</a>
-  </span>
-  <span>
-  @if (contact().isFavourite === true) {
-    ⭐
-  }
-  </span>  
+<li class="contact-row" [class.favourite]="contact().isFavourite === true" >
+  <div class="grid">
+    <span>{{ contact().firstName }} {{ contact().lastName }}</span>
+    <span>{{ contact().number }}</span>
+    <span>{{ contact().email }}</span>
+    <span class="favourite-star">
+   @if (contact().isFavourite === true) {
+     ⭐
+   }
+    </span>  
+    <span class="actions">
+      <button (click)="deleteContact()" class="btn-delete">Borrar</button>
+      <a [routerLink]="['/contacts', contact().id, 'edit']">Editar</a>
+    </span>
+  </div>
 </li>

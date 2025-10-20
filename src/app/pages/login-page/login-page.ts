@@ -20,13 +20,23 @@ export class LoginPage {
   async login(form:any){
     console.log(form.value)
     this.errorLogin = false;
+
     if(!form.value.email || !form.value.password){
       this.errorLogin = true;
       return
     }
+
     this.isLoading = true;
-    this.authService.login(form.value)
-    this.isLoading = false;
+
+    try {
+    
+    await this.authService.login(form.value);
+  } catch (error) {
+   
     this.errorLogin = true;
-  }
+  } finally {
+   
+    this.isLoading = false;
+   }
+ }
 }

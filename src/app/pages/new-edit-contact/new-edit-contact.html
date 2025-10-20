@@ -5,7 +5,6 @@
     <h2>Nuevo contacto</h2>
   }
  
- <h2>Nuevo contacto</h2>
  <form (ngSubmit)="HandleFormSubmission(newContactForm)" #newContactForm="ngForm">
   <div class="form-grid">
     <div>
@@ -62,7 +61,11 @@
     } @else {
       <button [disabled]="newContactForm.invalid">Crear</button>
     }
+    @if(isLoading){
+    <app-spinner></app-spinner>
+    }
 
     <button type="button" routerLink="/contacts" class="btn cancel">Cancelar</button>
   </div>  
  </form>
+ <app-spinner></app-spinner>

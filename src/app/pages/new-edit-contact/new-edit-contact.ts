@@ -2,21 +2,23 @@ import { Component, ElementRef, inject, input, OnInit, viewChild } from '@angula
 import { Form, FormGroup, FormsModule, NgControl, NgForm, NgModel } from '@angular/forms';
 import { Contact, NewContact } from '../../interfaces/contact';
 import { contactService } from '../../services/contact.service';
-import { Router, RouterLink } from '@angular/router';
+import { Router } from '@angular/router';
+import { Spinner } from "../../components/spinner/spinner";
 
 @Component({
   selector: 'app-new-edit-contact',
-  imports: [FormsModule, RouterLink],
+  imports: [FormsModule, Spinner],
   templateUrl: './new-edit-contact.html',
   styleUrl: './new-edit-contact.scss'
 })
 export class NewEditContact implements OnInit {
    contactsService = inject(contactService);
    router = inject(Router)
-  errorEnBack = false;
+     errorEnBack = false;
    idContacto = input<number>();
-  contactoOriginal:Contact|undefined = undefined;
+     contactoOriginal:Contact|undefined = undefined;
    form = viewChild<NgForm>("newContactForm");
+   isLoading: any;
 
   async ngOnInit(){
     if (this.idContacto()){

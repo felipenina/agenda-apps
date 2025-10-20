@@ -17,8 +17,8 @@ export class RegisterPage {
   router = inject(Router);
 
   async register(form: NgForm){
-    this.errorRegister = false; //Elimino el mensaje de error
-    // Hago validación extra sobre el formulario
+    this.errorRegister = false; 
+    
     if(!form.value.email || 
       !form.value.password || 
       !form.value.password2 || 
