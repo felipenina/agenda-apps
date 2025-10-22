@@ -4,9 +4,6 @@
   }@else {
     <h2>Nuevo contacto</h2>
   }
- <div class="preview" *ngIf="form()?.value.image">
-  <img [src]="form()?.value.image" alt="Imagen de contacto" />
-</div>
  <form (ngSubmit)="HandleFormSubmission(newContactForm)" #newContactForm="ngForm">
   <div class="form-grid">
     <div>

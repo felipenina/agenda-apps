@@ -1,19 +1,72 @@
 @if(cargandoContacto){
-  <p>Cargando contacto...</p>
+  <div class="loading-message">
+    <p>Cargando contacto...</p>
+  </div>
 } @else if(!contacto) {
-  <p>No se encontró el contacto</p>
+  <div class="error-message">
+    <p>No se encontró el contacto</p>
+  </div>
 } @else {
-  <h1>{{contacto!.firstName}} {{contacto!.lastName}}</h1>
-  <p>Email: {{contacto.email}}</p>
-  <p>Teléfono: {{contacto.number}}</p>
-@if (contacto.isFavourite) {
-  <p>⭐</p>
-  <button (click)="toggleFavorite()">Desmarcar favorito</button>
-} @else {
-  <button (click)="toggleFavorite()">Marcar como favorito</button>
-}
-  <p>
-    <a [routerLink]="['/contacts',idContacto(),'edit']">Editar</a>
+  
+  <p class="back-link-container">
+    <a [routerLink]="['/']" class="back-link">← Volver a Contactos</a>
   </p>
-  <button (click)="deleteContact()">Eliminar</button>
+
+  <div class="contact-card">
+    
+    <div class="contact-header">
+      
+      <div class="profile-image-container">
+        
+        <img [src]="contacto.image" 
+             alt="Foto de {{contacto.firstName}} {{contacto.lastName}}" 
+             class="profile-image" 
+             onerror="this.style.display='none'">
+        
+        
+        @if (!contacto.image) {
+           <div class="profile-initials">{{ contacto.firstName[0] }}{{ contacto.lastName[0] }}</div>
+        }
+      </div>
+      
+      <div class="main-info">
+        <h1>{{contacto!.firstName}} {{contacto!.lastName}}</h1>
+        <p class="company-name">{{contacto.company}}</p>
+        
+        
+        <div class="favorite-toggle">
+          @if (contacto.isFavourite) {
+            <span class="favorite-star">⭐ Favorito</span>
+            <button (click)="toggleFavorite()" class="action-button action-secondary">Desmarcar</button>
+          } @else {
+            <button (click)="toggleFavorite()" class="action-button action-primary">Marcar como favorito</button>
+          }
+        </div>
+      </div>
+    </div> 
+
+    
+    <div class="contact-details">
+      <h2>DETALLES DE CONTACTO</h2>
+      <div class="detail-group">
+        <p class="detail-label">Email:</p>
+        <p class="detail-value">{{contacto.email}}</p>
+      </div>
+      <div class="detail-group">
+        <p class="detail-label">Teléfono:</p>
+        <p class="detail-value">{{contacto.number}}</p>
+      </div>
+      <div class="detail-group">
+        <p class="detail-label">Dirección:</p>
+        <p class="detail-value">{{contacto.address || 'No especificada'}}</p>
+      </div>
+    </div> 
+
+   
+    <div class="contact-actions">
+      <a [routerLink]="['/contacts',idContacto(),'edit']" class="action-button action-edit">Editar</a>
+      <button (click)="deleteContact()" class="action-button action-delete">Eliminar</button>
+    </div>
+  </div> 
 }
+
