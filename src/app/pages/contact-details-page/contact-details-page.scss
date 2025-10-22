@@ -1,3 +1,10 @@
+$background-dark: #1e1e1e;
+$card-background: #252525;
+$text-color: #f0f0f0;
+$primary-color: #5d5dff; 
+$secondary-color: #560068; 
+$danger-color: #dc3545; 
+$border-color: #333;
 
 :host {
     display: flex;
@@ -192,10 +199,4 @@ h2 {
     }
 }
 
-$background-dark: #1e1e1e;
-$card-background: #252525;
-$text-color: #f0f0f0;
-$primary-color: #5d5dff; 
-$secondary-color: #560068; 
-$danger-color: #dc3545; 
-$border-color: #333;
+
