@@ -18,7 +18,7 @@ export class NewEditContact implements OnInit {
    idContacto = input<number>();
      contactoOriginal:Contact|undefined = undefined;
    form = viewChild<NgForm>("newContactForm");
-   isLoading: any;
+   isLoading: boolean = false;
 
   async ngOnInit(){
     if (this.idContacto()){
@@ -39,6 +39,7 @@ export class NewEditContact implements OnInit {
   }
   async HandleFormSubmission(form:NgForm){
     this.errorEnBack = false;
+    this.isLoading = true;
     const nuevoContacto: NewContact ={
       firstName: form.value.firstName,
       lastName: form.value.lastName,
@@ -49,18 +50,26 @@ export class NewEditContact implements OnInit {
       company: form.value.company,
       isFavourite: form.value.isFavourite
     }
-    let res;
+    let res: Contact | undefined;
+    let contactIdToNavigate: number | undefined = this.idContacto();
+
     if(this.idContacto()){
       res = await this.contactsService.editContact({...nuevoContacto, id:this.idContacto()!})
     } else{
       res = await this.contactsService.createContact(nuevoContacto);
+      contactIdToNavigate = res?.id;
     }
 
-    if(!res) {
-      this.errorEnBack = true;
-      return
+    this.isLoading = false;
+
+    console.log("respuesta del backend", res)
+
+    if(!res && contactIdToNavigate) {
+      this.router.navigate(["/contacts", contactIdToNavigate]);
+    } else {
+       this.errorEnBack = true;
     };
-    this.router.navigate(["/contacts"]);
+    
   }
   
 }
