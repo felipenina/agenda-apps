@@ -1,5 +1,5 @@
-import { Component, ElementRef, inject, input, OnInit, viewChild } from '@angular/core';
-import { Form, FormGroup, FormsModule, NgControl, NgForm, NgModel } from '@angular/forms';
+import { Component, inject, input, OnInit, viewChild } from '@angular/core';
+import {FormsModule, NgForm } from '@angular/forms';
 import { Contact, NewContact } from '../../interfaces/contact';
 import { contactService } from '../../services/contact.service';
 import { Router } from '@angular/router';
@@ -12,13 +12,14 @@ import { Spinner } from "../../components/spinner/spinner";
   styleUrl: './new-edit-contact.scss'
 })
 export class NewEditContact implements OnInit {
-   contactsService = inject(contactService);
-   router = inject(Router)
-     errorEnBack = false;
-   idContacto = input<number>();
-     contactoOriginal:Contact|undefined = undefined;
-   form = viewChild<NgForm>("newContactForm");
-   isLoading: boolean = false;
+  contactsService = inject(contactService);
+  router = inject(Router)
+  errorEnBack = false;
+  idContacto = input<number>();
+  contactoOriginal:Contact|undefined = undefined;
+  form = viewChild<NgForm>("newContactForm");
+  isLoading: boolean = false;
+  
 
   async ngOnInit(){
     if (this.idContacto()){
@@ -33,13 +34,13 @@ export class NewEditContact implements OnInit {
         company: this.contactoOriginal!.company,
         isFavourite: this.contactoOriginal!.isFavourite
       })
-
-    }
-    
+    }  
   }
+
   async HandleFormSubmission(form:NgForm){
     this.errorEnBack = false;
     this.isLoading = true;
+
     const nuevoContacto: NewContact ={
       firstName: form.value.firstName,
       lastName: form.value.lastName,
@@ -50,22 +51,22 @@ export class NewEditContact implements OnInit {
       company: form.value.company,
       isFavourite: form.value.isFavourite
     }
+
     let res: Contact | undefined;
-    let contactIdToNavigate: number | undefined = this.idContacto();
 
     if(this.idContacto()){
       res = await this.contactsService.editContact({...nuevoContacto, id:this.idContacto()!})
     } else{
       res = await this.contactsService.createContact(nuevoContacto);
-      contactIdToNavigate = res?.id;
+    
     }
 
     this.isLoading = false;
 
     console.log("respuesta del backend", res)
 
-    if(!res && contactIdToNavigate) {
-      this.router.navigate(["/contacts", contactIdToNavigate]);
+    if(res) {
+      this.router.navigate(["/"]);
     } else {
        this.errorEnBack = true;
     };
